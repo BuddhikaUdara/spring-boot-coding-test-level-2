@@ -1,48 +1,43 @@
 package com.accenture.codingtest.springbootcodingtest.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 @Entity
-@Table(name="Project")
+@Table(name = "Project")
 public class Project {
-
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private UUID id;
-	
-    @Column(name = "name" , unique=true)
+
     @NotBlank(message = "Required Field")
-    private String name ;
+    @Column(name = "name", unique = true)
+    private String name;
 
-	public Project() {
-			}
+    public Project() {
+    }
 
-	public UUID getId() {
-		return id;
-	}
+    public Project(String name) {
+        this.name = name;
+    }
 
-	public void setId(UUID id) {
-		this.id = id;
-	}
+    public Project(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public UUID getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-    
-    
-   
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }  
 }

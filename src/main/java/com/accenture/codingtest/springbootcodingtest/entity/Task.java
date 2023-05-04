@@ -1,98 +1,99 @@
 package com.accenture.codingtest.springbootcodingtest.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 @Entity
-@Table(name="Task")
+@Table(name = "Task")
 public class Task {
-
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private UUID id;
-	
-    @Column(name = "title")
+
     @NotBlank(message = "Required Field")
-    private String title ;    
-    
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "description")
     private String description;
-    
+
+    @NotBlank(message = "Required Field")
     @Column(name = "status")
-    @NotBlank(message = "Required Field")
     private String status;
-    
+
+    @NotNull(message = "Required Field")
     @Column(name = "project_id")
-    @NotBlank(message = "Required Field")
     private UUID project_id;
-    
+
+    @NotNull(message = "Required Field")
     @Column(name = "user_id")
-    @NotBlank(message = "Required Field")
     private UUID user_id;
 
-	public Task() {
-		
-	}
+    public Task() {
+    }
 
-	public UUID getId() {
-		return id;
-	}
+    public Task(UUID id, String title, String description, String status, UUID project_id, UUID user_id) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.project_id = project_id;
+        this.user_id = user_id;
+    }
 
-	public void setId(UUID id) {
-		this.id = id;
-	}
+    public Task(String title, String description, String status, UUID project_id, UUID user_id) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.project_id = project_id;
+        this.user_id = user_id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public UUID getId() {
+        return id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public UUID getProject_id() {
+        return project_id;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public UUID getUser_id() {
+        return user_id;
+    }
 
-	public UUID getProject_id() {
-		return project_id;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setProject_id(UUID project_id) {
-		this.project_id = project_id;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public UUID getUser_id() {
-		return user_id;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setUser_id(UUID user_id) {
-		this.user_id = user_id;
-	}
-    
-    
-    
-    
-    
+    public void setProject_id(UUID project_id) {
+        this.project_id = project_id;
+    }
+
+    public void setUser_id(UUID user_id) {
+        this.user_id = user_id;
+    }
 }
