@@ -3,6 +3,8 @@ package com.accenture.codingtest.springbootcodingtest.service;
 import com.accenture.codingtest.springbootcodingtest.entity.Project;
 import com.accenture.codingtest.springbootcodingtest.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +26,17 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
+    @Autowired
+    private CacheManager cacheManager;
+    
+    
     /**
     public List<Project> getAllProjects() {
     	return projectRepository.findAll();
     }
     **/
     
+    @Cacheable("allProjectsCache")
     public List<Project> getAllProjects(String q, int pageIndex, int pageSize, String sortBy, String sortDirection) {
 	    
     	Sort.Direction direction = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.Direction.ASC : Sort.Direction.DESC;
