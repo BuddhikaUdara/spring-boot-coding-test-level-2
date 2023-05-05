@@ -13,6 +13,9 @@ import java.util.UUID;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
+	
     @Query("SELECT p.id FROM Project p WHERE p.name = :name")
     Optional<Project> findProjectByName (String name);
+        
+    Page<Project> findAllProjectsByName(String name, Pageable pageable);
 }
