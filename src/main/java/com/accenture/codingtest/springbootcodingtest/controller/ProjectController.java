@@ -24,7 +24,7 @@ public class ProjectController {
     }
 
     /** 8.GET retrieve all resources  **/
-    @GetMapping
+    /** @GetMapping
     public ResponseEntity<List<Project>> getAllProjects() {
         try {
             return new ResponseEntity<>(projectService.getAllProjects(), HttpStatus.OK);
@@ -32,7 +32,23 @@ public class ProjectController {
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+     **/
+    
+    /** 13. Implement pagination feature GET /api/v1/projects API. It should be able to receive query strings:  **/
+    @GetMapping
+    public ResponseEntity<List<Project>> getAllProjects(
+            @RequestParam(value = "q") String q,
+            @RequestParam(value = "pageIndex", defaultValue = "0") int pageIndex,
+            @RequestParam(value = "pageSize", defaultValue = "3") int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
+            @RequestParam(value = "sortDirection", defaultValue = "ASC") String sortDirection) {
+        try {
+            return new ResponseEntity<>(projectService.getAllProjects(q, pageIndex, pageSize, sortBy, sortDirection), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
     /** 9.GET retrieve one resource by id **/
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable UUID id) {
