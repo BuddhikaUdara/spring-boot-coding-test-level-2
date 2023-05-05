@@ -2,6 +2,7 @@ package com.accenture.codingtest.springbootcodingtest.service;
 import com.accenture.codingtest.springbootcodingtest.entity.Project;
 import com.accenture.codingtest.springbootcodingtest.entity.Task;
 import com.accenture.codingtest.springbootcodingtest.entity.User;
+import com.accenture.codingtest.springbootcodingtest.enums.Status;
 import com.accenture.codingtest.springbootcodingtest.repository.ProjectRepository;
 import com.accenture.codingtest.springbootcodingtest.repository.TaskRepository;
 import com.accenture.codingtest.springbootcodingtest.repository.UserRepository;
@@ -46,6 +47,7 @@ public class TaskService {
                     Task newTask = new Task();
                     newTask.setTitle(task.getTitle());
                     newTask.setDescription(task.getDescription());
+                    newTask.setStatus(Status.NOT_STARTED.name()); //9. v. When a task is created, status will be NOT_STARTED
                     newTask.setProject_id(task.getProject_id());
                     newTask.setUser_id(task.getUser_id());
                     taskRepository.save(newTask);
